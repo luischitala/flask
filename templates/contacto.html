@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{%block titulo %}Contacto{% endblock %}
+
+{%block contenido %}
+<form action="{{ url_for('enviar')}}" method="POST">
+    <label for="nombre">Nombre</label><input type="text" name="nombre" value=""><br><br>
+    <label for="email">E-mail</label><input type="text" name="email" value=""><br><br>
+   <label for="cometario">Comentario</label> <input type="text" name="comentario" value=""><br><br>
+    <input type="submit" value="submit">
+
+</form>
+
+{% endblock %}

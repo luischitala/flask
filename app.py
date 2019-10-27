@@ -19,6 +19,14 @@ def suma(num1 = 0,num2 = 0):
     contexto = {'num1':num1, 'num2':num2}
     return render_template("suma.html",**contexto)
 
+@app.route("/contacto/")
+
+def contacto():
+    return render_template("contacto.html")
+
+@app.route("/enviar", methods=['POST'])
+def enviar():
+    return "Exito"
 
 if __name__ == "__main__":
     app.run(debug=True)
