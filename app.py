@@ -1,5 +1,5 @@
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template, url_for, redirect, request
+import json
 
 app = Flask(__name__)
 
@@ -26,7 +26,9 @@ def contacto():
 
 @app.route("/enviar", methods=['POST'])
 def enviar():
-    return "Exito"
+    response = redirect(url_for('hola_mundo'))
+    response.set_cookie(json.dumps(dict(request.form.items())))
+    return response
 
 if __name__ == "__main__":
     app.run(debug=True)
