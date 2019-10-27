@@ -5,9 +5,15 @@ app = Flask(__name__)
 
 
 @app.route("/")
-@app.route("/<nombre>")
 
 def hola_mundo(nombre="Invitado"):
+   try:
+         data = json.loads(request.cookies.get('data'))
+   except TypeError:
+        data = {}
+   else:
+        nombre = data.get('nombre')
+   
    contexto = {'nombre':nombre}
    return render_template("index.html",**contexto)
 
@@ -27,7 +33,8 @@ def contacto():
 @app.route("/enviar", methods=['POST'])
 def enviar():
     response = redirect(url_for('hola_mundo'))
-    response.set_cookie(json.dumps(dict(request.form.items())))
+    response.set_cookie('data', json.dumps(dict(request.form.items())))
+    response.set_cookie('sesion', 'información de sesión' )
     return response
 
 if __name__ == "__main__":
